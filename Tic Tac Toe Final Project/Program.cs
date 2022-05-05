@@ -1,7 +1,7 @@
 ﻿//Hello from Violeta TEST
 //Hello from Indre TEST
 //Hello from Linda TEST
-class Program
+public class Program
 {
     static void Main(string[] args)
     {
@@ -15,13 +15,16 @@ class Program
 
             Display(currentPlayer);// Method should be declared, so we can use it STEP 6
             GameBoard(boardSquares); //STEP 8 and STEP 12.1
-                         // Adding user input STEP 4
+                                     // Adding user input STEP 4
+
+            GameCore(boardSquares, currentPlayer); //STEP 13.1
+
             string userInput = Console.ReadLine();
             Console.Clear();
         }
         while (true);
-        
-        
+
+
 
         //Create an array for the game board
 
@@ -40,7 +43,7 @@ class Program
             Console.WriteLine();
         }
         //Creating a method not to repeat the board all the time until we get a winner/draw STEP 7
-        static void GameBoard(char [] boardSquares)
+        static void GameBoard(char[] boardSquares)
         {
             //Creating gameBoard STEP 3 , Update the method GameBoard() with array values STEP 12 
             Console.WriteLine($"{boardSquares[0]} | {boardSquares[1]} | {boardSquares[2]}");
@@ -58,6 +61,58 @@ class Program
                 return 2;
             }
             return 1;
+        }
+
+
+        static void GameCore(char[] boardSquares, int currentPlayer) //create a method GameCore for the logic of the game STEP13
+        {
+            bool notValidMove = true; //new variable for do-while loop STEP 20.1
+            do // if player makes a mistake, keep looping untill right selection STEP 20
+            {
+                string userInput = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(userInput) && //check if user enters a value that is not from 1 to 9 STEP 19
+                    userInput == "1" ||//check if user input is a number between 1-9 STEP 14 
+                    userInput == "2" ||//check all squares STEP 18
+                    userInput == "3" ||
+                    userInput == "4" ||
+                    userInput == "5" ||
+                    userInput == "6" ||
+                    userInput == "7" ||
+                    userInput == "8" ||
+                    userInput == "9")
+                {
+                    Console.Clear();
+
+                    int.TryParse(userInput, out var gamePlacementMarker); //convert user input to an int value STEP 15
+
+                    char currentMarker = boardSquares[gamePlacementMarker - 1];
+
+                    if (currentMarker == 'X' || currentMarker == 'O') //check if placement that the user made is x or o STEP 16
+                    {
+                        Console.WriteLine("Placement has already a marker, please choose another placement");
+                    }
+                    else
+                    {
+                        boardSquares[gamePlacementMarker - 1] = GetPlayerMarker(currentPlayer);
+                        notValidMove = false; //STEP 20.2
+                    }
+                }
+            }
+            while (notValidMove); //STEP 20.3
+
+
+        static char GetPlayerMarker(int player) //create new method GetPlayerMarker to see if it is player 1 or player 2 STEP 17
+            {
+                if (player % 2 == 0)
+                {
+                    return 'O';
+                }
+                else
+                {
+                    return 'X';
+                }
+            }
         }
     }
 }
