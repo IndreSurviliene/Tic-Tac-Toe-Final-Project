@@ -18,8 +18,6 @@ public class Program
                                      // Adding user input STEP 4
 
             GameCore(boardSquares, currentPlayer); //STEP 13.1
-
-            string userInput = Console.ReadLine();
             Console.Clear();
         }
         while (true);
@@ -62,8 +60,6 @@ public class Program
             }
             return 1;
         }
-
-
         static void GameCore(char[] boardSquares, int currentPlayer) //create a method GameCore for the logic of the game STEP13
         {
             bool notValidMove = true; //new variable for do-while loop STEP 20.1
