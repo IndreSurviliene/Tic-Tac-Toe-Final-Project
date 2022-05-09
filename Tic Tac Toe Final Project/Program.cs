@@ -5,12 +5,15 @@ public class Program
 {
     static void Main(string[] args)
     {
+        int gameStatus = 0; // STEP 21  new variable to identify who won or the game was a draw
         int currentPlayer = -1; // Declare new variable STEP 10
 
         char[] boardSquares = { '1', '2', '3', '4', '5', '6', '7', '8', '9' }; // STEP 1 , STEP 11
         // We use do-while because we need to get inside the loop and check condition later STEP 9
         do
         {
+            Console.Clear();
+
             currentPlayer = GetNextPlayer(currentPlayer); // STEP 10.2 
 
             Display(currentPlayer);// Method should be declared, so we can use it STEP 6
@@ -18,12 +21,91 @@ public class Program
                                      // Adding user input STEP 4
 
             GameCore(boardSquares, currentPlayer); //STEP 13.1
-            Console.Clear();
+            
+            gameStatus = WinnerCheck(boardSquares);
         }
-        while (true);
+        while (gameStatus == 0); // STEP 21.1 
 
+        if (gameStatus == 1)
+        {
+            Console.WriteLine($"The player {currentPlayer} is the winner!");
+        }
 
+        if (gameStatus == 2)
+        {
+            Console.WriteLine($"There are no winners. Play again!");
+        }
 
+        // new method to check the winner STEP 22
+        static int WinnerCheck(char[] boardSquares)
+        {
+            if (GameDraw(boardSquares))
+            {
+                return 2;
+            }
+            if (GameWinner(boardSquares))
+            {
+                return 1;
+            }
+            return 0;
+        }
+        // Checking for all the possible wins STEP 23
+        static bool GameWinner(char[] boardSquares)
+        {
+            if (AreBoardSquaresTheSame(boardSquares, 0, 1, 2))
+            {
+                return true;
+            }
+            if (AreBoardSquaresTheSame(boardSquares, 3, 4, 5))
+            {
+                return true;
+            }
+            if (AreBoardSquaresTheSame(boardSquares, 6, 7, 8))
+            {
+                return true;
+            }
+            if (AreBoardSquaresTheSame(boardSquares, 0, 3, 6))
+            {
+                return true;
+            }
+            if (AreBoardSquaresTheSame(boardSquares, 1, 4, 7))
+            {
+                return true;
+            }
+            if (AreBoardSquaresTheSame(boardSquares, 2, 5, 8))
+            {
+                return true;
+            }
+            if (AreBoardSquaresTheSame(boardSquares, 0, 4, 8))
+            {
+                return true;
+            }
+            if (AreBoardSquaresTheSame(boardSquares, 2, 4, 6))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //STEP 25 Create a method to check positions for horizontaly, verticaly and ...
+        static bool AreBoardSquaresTheSame(char[] testBoardSquares, int pos1, int pos2, int pos3)
+        {
+            return testBoardSquares[pos1] == testBoardSquares[pos2] && testBoardSquares[pos2] == testBoardSquares[pos3];
+        }
+
+        // STEP 26 There is no winner or no looser
+        static bool GameDraw(char[] gameMarkers)
+        {
+            return gameMarkers[0] != '1' &&
+                   gameMarkers[1] != '2' &&
+                   gameMarkers[2] != '3' &&
+                   gameMarkers[3] != '4' &&
+                   gameMarkers[4] != '5' &&
+                   gameMarkers[5] != '6' &&
+                   gameMarkers[6] != '7' &&
+                   gameMarkers[7] != '8' &&
+                   gameMarkers[8] != '9';
+        }
         //Create an array for the game board
 
         //Check for the winner (if gameStatus = 0 we are still playing)
