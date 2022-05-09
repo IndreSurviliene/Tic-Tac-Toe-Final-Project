@@ -1,10 +1,14 @@
 ﻿//Hello from Violeta TEST
 //Hello from Indre TEST
 //Hello from Linda TEST
+using Tic_Tac_Toe_Final_Project;
+
 public class Program
 {
     static void Main(string[] args)
     {
+        SQL_connection conn = new SQL_connection();
+
         int gameStatus = 0; // STEP 21  new variable to identify who won or the game was a draw
         int currentPlayer = -1; // Declare new variable STEP 10
 
