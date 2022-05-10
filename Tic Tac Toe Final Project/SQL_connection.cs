@@ -12,11 +12,15 @@ namespace Tic_Tac_Toe_Final_Project
         string database { get; set; } //your database name
         string connString { get; set; }
         public SqlConnection conn { get; set; }
+        string Nickname { get; set; }
+        string Nickname2 { get; set; }
+
         public SQL_connection()
         {
             Console.WriteLine("Getting Connection....");
             var datasource = @"LAPTOP-V1DUSTDQ";
             var database = "TicTacToe_database";
+            //var dbConnection = new SqlConnection(datasource);
 
             string connString = @"Data Source=" + datasource + ";Initial Catalog=" + database + ";Trusted_Connection = True;";
 
@@ -25,15 +29,30 @@ namespace Tic_Tac_Toe_Final_Project
 
             try
             {
-            Console.WriteLine("Opening connection....");
-            conn.Open();
-            Console.WriteLine("Connection is successful!");
+                Console.WriteLine("Opening connection....");
+                conn.Open();
+                Console.WriteLine("Connection is successful!");
             }
             catch (Exception e)
             {
-            Console.WriteLine("Error:" + e.Message);
+                Console.WriteLine("Error:" + e.Message);
             }
             Console.Read();
+            {
+                try
+                {
+                    string query = $"INSERT INTO Players ( Nickname) VALUES('{Nickname}', '{Nickname2}'); ";
+                    //SqlCommand cmd = new SqlCommand(query, dbConnection.connection);
+                    SqlCommand cmd = new SqlCommand(query, dbConnection.conn);
+                    var number = cmd.ExecuteNonQuery();
+                    Console.WriteLine("Rows affected : " + number);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+
+            }
         }
     }
 }
