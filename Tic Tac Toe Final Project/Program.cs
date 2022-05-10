@@ -7,20 +7,30 @@ public class Program
 {
     static void Main(string[] args)
     {
-        SQL_connection conn = new SQL_connection();
+       // SQL_connection conn = new SQL_connection();
 
+        
         int gameStatus = 0; // STEP 21  new variable to identify who won or the game was a draw
         int currentPlayer = -1; // Declare new variable STEP 10
+       
+
+        Console.WriteLine($"Player 1, enter your nickname");
+        string Nickname = Console.ReadLine();
+        Console.WriteLine($"Player 2, enter your nickname");
+        string Nickname2 = Console.ReadLine();
 
         char[] boardSquares = { '1', '2', '3', '4', '5', '6', '7', '8', '9' }; // STEP 1 , STEP 11
         // We use do-while because we need to get inside the loop and check condition later STEP 9
+       // UserInput();
+
         do
         {
+            
             Console.Clear();
-
             currentPlayer = GetNextPlayer(currentPlayer); // STEP 10.2 
 
-            Display(currentPlayer);// Method should be declared, so we can use it STEP 6
+            Display(currentPlayer, Nickname, Nickname2);// Method should be declared, so we can use it STEP 6
+          
             GameBoard(boardSquares); //STEP 8 and STEP 12.1
                                      // Adding user input STEP 4
 
@@ -116,12 +126,21 @@ public class Program
 
         //Creating display with the players STEP 2
 
+       /* static void UserInput()
+        {
+            Console.WriteLine($"Player 1, enter your nickname");
+            string Nickname = Console.ReadLine();
+            Console.WriteLine($"Player 2, enter your nickname");
+            string Nickname2 = Console.ReadLine(); 
+        }*/
+
+
         //Creating a method not to repeat the Display all the time until we get a winner/draw STEP 5
-        static void Display(int PlayerNumber)
+        static void Display(int PlayerNumber, string Nickname, string Nickname2)
         {
             Console.WriteLine("Welcome to Tic Tac Toe!");
-            Console.WriteLine("\nPlayer 1 plays with 'X'");
-            Console.WriteLine("Player 2 plays with 'O'");
+            Console.WriteLine($"\n{Nickname} is Player 1, plays with 'X'");
+            Console.WriteLine($"{Nickname2} is Player 2, plays with 'O'");
             Console.WriteLine();
             Console.WriteLine($"Player {PlayerNumber} in order to move, choose a number from 1-9");
             Console.WriteLine();
@@ -195,6 +214,10 @@ public class Program
                     return 'X';
                 }
             }
+            
         }
+    
     }
+
+    
 }
