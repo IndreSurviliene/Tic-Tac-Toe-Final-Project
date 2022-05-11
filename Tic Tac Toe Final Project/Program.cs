@@ -7,12 +7,14 @@ public class Program
 {
     static void Main(string[] args)
     {
-       //SQL_connection conn = new SQL_connection();
-        
+       SQL_connection conn = new SQL_connection();
+
+        //string nickname = new Nickname(conn);
+        //string nickname2 = new Nickname2(conn);
+
         int gameStatus = 0; // STEP 21  new variable to identify who won or the game was a draw
         int currentPlayer = -1; // Declare new variable STEP 10
-       
-
+        
         Console.WriteLine($"Player 1, enter your nickname");
         string Nickname = Console.ReadLine();
         Console.WriteLine($"Player 2, enter your nickname");
