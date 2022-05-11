@@ -5,13 +5,10 @@ using Tic_Tac_Toe_Final_Project;
 
 public class Program
 {
-    static void Main(string[] args)
+   static void Main(string[] args)
     {
-       SQL_connection conn = new SQL_connection();
-
-        //string nickname = new Nickname(conn);
-        //string nickname2 = new Nickname2(conn);
-
+        
+       
         int gameStatus = 0; // STEP 21  new variable to identify who won or the game was a draw
         int currentPlayer = -1; // Declare new variable STEP 10
         
@@ -19,6 +16,9 @@ public class Program
         string Nickname = Console.ReadLine();
         Console.WriteLine($"Player 2, enter your nickname");
         string Nickname2 = Console.ReadLine();
+
+        SQL_connection conn = new SQL_connection();
+        SQL_connection.Main2();
 
         char[] boardSquares = { '1', '2', '3', '4', '5', '6', '7', '8', '9' }; // STEP 1 , STEP 11
         // We use do-while because we need to get inside the loop and check condition later STEP 9
@@ -141,7 +141,7 @@ public class Program
         {
             Console.WriteLine("Welcome to Tic Tac Toe!");
             Console.WriteLine($"\n{Nickname} is Player 1, plays with 'X'");
-            Console.WriteLine($"{Nickname2} is Player 2, plays with 'O'");
+            Console.WriteLine($"\n{Nickname2} is Player 2, plays with 'O'");
             Console.WriteLine();
             Console.WriteLine($"Player {PlayerNumber} in order to move, choose a number from 1-9");
             Console.WriteLine();

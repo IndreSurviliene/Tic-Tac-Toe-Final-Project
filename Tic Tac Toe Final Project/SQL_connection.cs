@@ -12,7 +12,7 @@ namespace Tic_Tac_Toe_Final_Project
     {
         string Nickname { get; set; }
         string Nickname2 { get; set; }
-        static void Main(string[] args)
+        public static void Main2()
         {
             Console.WriteLine("Getting Connection ...");
             
@@ -22,7 +22,7 @@ namespace Tic_Tac_Toe_Final_Project
             string connString = @"Data Source=" + datasource + ";Initial Catalog=" + database + ";Trusted_Connection = True;";
             Console.WriteLine(connString);
 
-            string query = $"INSERT INTO Players ( Nickname) VALUES('{Nickname}', '{Nickname2}');";
+            string query = $"INSERT INTO [Players] VALUES('nickname', 'nickname2')";
 
             SqlConnection conn = new SqlConnection(connString);
 
